@@ -1,0 +1,10 @@
+package tv.pouyaam.bottrader.domain.usecase.cryptocompare.historical.daily
+
+import tv.pouyaam.bottrader.domain.model.cryptocompare.historical.daily.ResponseHistoricalDailyDomain
+import tv.pouyaam.bottrader.domain.transformation.cryptocompare.historical.HistoricalDailyTransformation
+import tv.pouyaam.bottrader.domain.usecase.UseCase
+import tv.pouyaam.bottrader.network.model.cryptocompare.historical.RequestHistorical
+import tv.pouyaam.bottrader.network.model.cryptocompare.historical.daily.ResponseHistoricalDaily
+import tv.pouyaam.bottrader.repository.cryptocompare.historical.daily.HistoricalRepositoryDaily
+
+class HistoricalDailyUseCase(historicalRepositoryDaily: HistoricalRepositoryDaily, historicalDailyTransformation: HistoricalDailyTransformation) : UseCase<RequestHistorical, ResponseHistoricalDaily, ResponseHistoricalDailyDomain>(historicalRepositoryDaily, historicalDailyTransformation)

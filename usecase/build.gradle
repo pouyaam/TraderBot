@@ -1,0 +1,14 @@
+import tv.pouyaam.dependencies.Dependencies
+apply from: '../modules_common.gradle'
+
+repositories {
+    google()
+}
+
+dependencies {
+    implementation project(path: Dependencies.Modules.domain)
+    implementation project(path: Dependencies.Modules.network)
+    implementation Dependencies.Android.lifeCycleViewModel
+    implementation Dependencies.Android.lifeCycleScope
+    implementation Dependencies.Android.lifecycleLiveData
+}

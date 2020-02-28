@@ -1,0 +1,78 @@
+import tv.pouyaam.dependencies.Dependencies
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "tv.pouyaam.bottrader"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+}
+
+repositories {
+    google()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(path: Dependencies.Modules.domain)
+    implementation project(path: Dependencies.Modules.network)
+    implementation project(path: Dependencies.Modules.repository)
+    implementation Dependencies.Kotlin.kotlin
+
+    implementation Dependencies.Android.appCompat
+    implementation Dependencies.Android.coreKtx
+    implementation Dependencies.Android.constraintLayout
+    implementation Dependencies.Android.lifeCycleViewModel
+    implementation Dependencies.Android.lifeCycleScope
+    implementation Dependencies.Android.lifecycleLiveData
+    implementation Dependencies.Android.lifecycleExtensions
+    implementation Dependencies.Retrofit.retrofit
+
+    implementation Dependencies.Koin.koinAndroidx
+    implementation Dependencies.Koin.koinAndroidxScope
+    implementation Dependencies.Koin.koinAndroidxViewModel
+
+    // Coroutines
+    implementation Dependencies.Couroutines.coroutinesCore
+    implementation Dependencies.Couroutines.coroutinesAndroid
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+}

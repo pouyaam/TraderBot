@@ -1,0 +1,14 @@
+import tv.pouyaam.dependencies.Dependencies
+
+apply from: '../modules_common.gradle'
+
+dependencies {
+    implementation Dependencies.Retrofit.retrofit
+    implementation Dependencies.Retrofit.retrofitGsonConverter
+    implementation Dependencies.OkHttp.okHttp
+    implementation Dependencies.OkHttp.okHttpInterceptor
+    implementation Dependencies.Gson.gson
+    implementation Dependencies.Couroutines.coroutinesCore
+    implementation Dependencies.Couroutines.coroutinesAndroid
+    implementation Dependencies.Koin.koinAndroidx
+}

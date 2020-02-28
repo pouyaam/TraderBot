@@ -1,0 +1,13 @@
+import tv.pouyaam.dependencies.Dependencies
+
+apply from: '../modules_common.gradle'
+
+dependencies {
+    implementation project(path: Dependencies.Modules.network)
+    implementation project(path: Dependencies.Modules.repository)
+    implementation Dependencies.Android.lifeCycleViewModel
+    implementation Dependencies.Android.lifeCycleScope
+    implementation Dependencies.Android.lifecycleLiveData
+    implementation Dependencies.Koin.koinAndroidx
+
+}
