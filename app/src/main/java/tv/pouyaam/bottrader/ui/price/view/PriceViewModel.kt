@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package tv.pouyaam.bottrader.ui.main.activity
+package tv.pouyaam.bottrader.ui.price.view
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
@@ -16,7 +16,7 @@ import tv.pouyaam.bottrader.domain.usecase.cryptocompare.historical.daily.Histor
 import tv.pouyaam.bottrader.network.model.cryptocompare.historical.RequestHistorical
 
 @ExperimentalCoroutinesApi
-class MainViewModel(
+class PriceViewModel(
     private val priceUseCase: PriceUseCase,
     private val historicalDailyUseCase: HistoricalDailyUseCase
 ): ViewModel() {

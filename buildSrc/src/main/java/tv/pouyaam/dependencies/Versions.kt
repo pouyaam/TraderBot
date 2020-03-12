@@ -42,4 +42,8 @@ object Versions {
         const val CoroutinesCore = "1.3.1"
         const val CoroutinesAndroid = "1.3.1"
     }
+
+    object Navigation {
+        const val navVersion = "2.3.0-alpha03"
+    }
 }

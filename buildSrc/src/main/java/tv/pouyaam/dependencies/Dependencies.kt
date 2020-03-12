@@ -18,7 +18,6 @@ object Dependencies {
         const val lifeCycleScope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.lifeCycleScope}"
         const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.lifecycleLiveData}"
         const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifecycleExtensions}"
-
     }
 
     object Kotlin {
@@ -54,6 +53,12 @@ object Dependencies {
     object Couroutines {
         const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Couroutines.CoroutinesCore}}"
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Couroutines.CoroutinesCore}"
+    }
+
+    object Navigation {
+        const val navFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation.navVersion}"
+        const val navUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.navVersion}"
+        const val navDynamicFeatures = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.Navigation.navVersion}"
     }
 
 

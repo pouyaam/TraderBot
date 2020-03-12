@@ -10,6 +10,7 @@ import tv.pouyaam.bottrader.network.di.retrofitModule
 import tv.pouyaam.bottrader.repository.coinbase.di.priceRepositoryModule
 import tv.pouyaam.bottrader.repository.cryptocompare.di.historicalModule
 import tv.pouyaam.bottrader.ui.main.di.moduleMainActivity
+import tv.pouyaam.bottrader.ui.price.di.moduleFragmentPrice
 
 class App : Application() {
     override fun onCreate() {
@@ -25,7 +26,8 @@ class App : Application() {
                     priceDomainModule,
                     historicalModule,
                     historicalDomainModule,
-                    moduleMainActivity
+                    moduleMainActivity,
+                    moduleFragmentPrice
                 )
             )
         }
