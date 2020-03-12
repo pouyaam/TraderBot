@@ -7,22 +7,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 import tv.pouyaam.bottrader.network.interceptor.cryptocompare.ApiKeyInterceptor
 import tv.pouyaam.bottrader.network.retrofit.RetrofitProvider
 
-class CryptoCompareRetrofitProviderImpl(private val apiKeyInterceptor: ApiKeyInterceptor) : RetrofitProvider {
-    private val retrofit: Retrofit
-    private val okHttpClient: OkHttpClient
-        get() {
-            return OkHttpClient.Builder()
-                .addInterceptor(
-                    HttpLoggingInterceptor()
-                        .setLevel(HttpLoggingInterceptor.Level.HEADERS)
-                        .setLevel(HttpLoggingInterceptor.Level.HEADERS)
-                )
-                .addInterceptor(apiKeyInterceptor)
-                .build()
-        }
+class CryptoCompareRetrofitProviderImpl(
+    baseUrl: String,
+    private val apiKeyInterceptor: ApiKeyInterceptor
+) : RetrofitProvider(baseUrl) {
 
     init {
-        retrofit = Retrofit.Builder().baseUrl("https://min-api.cryptocompare.com/").addConverterFactory(
+        okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(
+                HttpLoggingInterceptor()
+                    .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+                    .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            )
+            .addInterceptor(apiKeyInterceptor)
+            .build()
+
+        retrofit = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(
             GsonConverterFactory.create()).client(okHttpClient).build()
     }
 

@@ -6,21 +6,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tv.pouyaam.bottrader.network.retrofit.RetrofitProvider
 
-class CoinbaseRetrofitProviderImpl():
-    RetrofitProvider {
-
-    private val retrofit: Retrofit
-    private val okHttpClient: OkHttpClient
-        get() {
-            return OkHttpClient.Builder().addInterceptor(
-                HttpLoggingInterceptor()
-                    .setLevel(HttpLoggingInterceptor.Level.HEADERS)
-                    .setLevel(HttpLoggingInterceptor.Level.HEADERS)
-            ).build()
-        }
+class CoinbaseRetrofitProviderImpl(baseUrl: String) : RetrofitProvider(baseUrl) {
 
     init {
-        retrofit = Retrofit.Builder().baseUrl("https://api.coinbase.com/").addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build()
+        okHttpClient = OkHttpClient.Builder().addInterceptor(
+            HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+                .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        ).build()
+        retrofit = Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build()
     }
 
     override fun provideRetrofit(): Retrofit = retrofit
