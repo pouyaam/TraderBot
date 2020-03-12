@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BotTrader</string>
+    <string name="check_price">CHECK PRICE</string>
 </resources>

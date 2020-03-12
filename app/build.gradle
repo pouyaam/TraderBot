@@ -51,6 +51,9 @@ dependencies {
     implementation project(path: Dependencies.Modules.domain)
     implementation project(path: Dependencies.Modules.network)
     implementation project(path: Dependencies.Modules.repository)
+    implementation project(path: Dependencies.Modules.common)
+    implementation project(path: Dependencies.Modules.navigation)
+
     implementation Dependencies.Kotlin.kotlin
 
     implementation Dependencies.Android.appCompat

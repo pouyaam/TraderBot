@@ -1,0 +1,8 @@
+import tv.pouyaam.dependencies.Dependencies
+
+apply from: '../modules_common.gradle'
+
+
+dependencies {
+
+}

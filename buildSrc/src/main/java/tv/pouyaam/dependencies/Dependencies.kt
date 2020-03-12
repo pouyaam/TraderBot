@@ -7,6 +7,8 @@ object Dependencies {
         const val usecase = ":usecase"
         const val network = ":network"
         const val repository = ":repository"
+        const val common = ":common"
+        const val navigation = ":navigation"
     }
     object Android {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.AppCompat}"

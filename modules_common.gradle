@@ -34,6 +34,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dependencies.Kotlin.kotlin
+    implementation project(path: Dependencies.Modules.common)
 }
 
 repositories {

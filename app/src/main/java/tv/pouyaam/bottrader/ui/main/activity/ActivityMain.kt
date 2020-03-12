@@ -3,6 +3,7 @@ package tv.pouyaam.bottrader.ui.main.activity
 import android.util.Log
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.ta4j.core.*
 import org.ta4j.core.analysis.criteria.TotalProfitCriterion
@@ -24,6 +25,7 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 
+@ExperimentalCoroutinesApi
 class ActivityMain : ActivityBase<ActivityMainBinding, MainViewModel>() {
     private val viewModel: MainViewModel by viewModel()
 
@@ -34,7 +36,7 @@ class ActivityMain : ActivityBase<ActivityMainBinding, MainViewModel>() {
 
     override fun viewModelBinded() {
         binding.viewModel?.loading?.observe(this) {
-//            if (it) btc_price.text = "Loading..."
+            if (it) btc_price.text = "Loading..."
         }
 
         binding.viewModel?.error?.observe(this) {
@@ -42,7 +44,7 @@ class ActivityMain : ActivityBase<ActivityMainBinding, MainViewModel>() {
         }
 
         binding.viewModel?.btcPrice?.observe(this) {
-//            btc_price.text = "${it.dataDomain.amount} ${it.dataDomain.currency}"
+            btc_price.text = "${it.dataDomain.amount} ${it.dataDomain.currency}"
         }
 
         binding.viewModel?.btcMonthPrice?.observe(this) {
