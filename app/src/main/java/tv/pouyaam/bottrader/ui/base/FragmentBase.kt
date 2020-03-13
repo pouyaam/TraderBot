@@ -4,17 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.reflect.ParameterizedType
+import androidx.lifecycle.observe
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import org.koin.android.ext.android.inject
+import tv.pouyaam.bottrader.navigation.domain.NavResultDomain
+import tv.pouyaam.bottrader.navigation.ktx.onResult
+import tv.pouyaam.bottrader.navigation.result.NavResultHandler
 
 
-abstract class FragmentBase<BINDING : ViewDataBinding, VIEWMODEL: ViewModel> : Fragment() {
+@FlowPreview
+abstract class FragmentBase<BINDING : ViewDataBinding, VIEWMODEL: ViewModelBase> : Fragment(), BaseContract {
+    private val navResultHandler: NavResultHandler by inject()
+    private lateinit var viewModelBase: ViewModelBase
     protected lateinit var binding: BINDING
 
     override fun onCreateView(
@@ -23,12 +32,32 @@ abstract class FragmentBase<BINDING : ViewDataBinding, VIEWMODEL: ViewModel> : F
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, getViewId(), container, false)
-        bindViewModel()
-        viewModelBinded()
+        viewModelBase = onBinding()
+
+        onBindingFinished()
+
+        viewModelBase.result.observe(this) { onResult(it) }
+
         return binding.root
     }
 
+    @ExperimentalCoroutinesApi
+    override fun navigateToDirection(
+        direction: NavDirections
+    ) {
+
+        navResultHandler.newChannel().resultChannel.onResult { viewModelBase.result(it) }
+
+        findNavController().navigate(direction)
+    }
+
+    override fun popWithResult(channelName: String, payload: Any) {
+        navResultHandler.send(channelName, payload)
+        findNavController().popBackStack()
+    }
+
     abstract fun getViewId() : Int
-    abstract fun bindViewModel()
-    abstract fun viewModelBinded()
+    abstract fun onBinding() : ViewModelBase
+    abstract fun onBindingFinished()
+    abstract fun onResult(navResultDomain: NavResultDomain)
 }

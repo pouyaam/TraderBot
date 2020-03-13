@@ -2,8 +2,8 @@ package tv.pouyaam.bottrader.ui.price.di
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import tv.pouyaam.bottrader.ui.price.view.PriceViewModel
+import tv.pouyaam.bottrader.ui.price.view.ViewModelPrice
 
 val moduleFragmentPrice = module {
-    viewModel { PriceViewModel(get(), get()) }
+    viewModel { ViewModelPrice(get(), get()) }
 }

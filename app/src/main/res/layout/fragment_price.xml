@@ -7,7 +7,11 @@
 
         <variable
             name="viewModel"
-            type="tv.pouyaam.bottrader.ui.price.view.PriceViewModel" />
+            type="tv.pouyaam.bottrader.ui.price.view.ViewModelPrice" />
+
+        <variable
+            name="contract"
+            type="tv.pouyaam.bottrader.ui.price.view.FragmentPriceContract" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +38,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btc_price" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> contract.navigateToResultPage()}"
+            android:text="@string/result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/check_price" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

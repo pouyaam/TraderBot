@@ -13,19 +13,21 @@ import tv.pouyaam.bottrader.domain.model.coinbase.price.ResponsePriceDomain
 import tv.pouyaam.bottrader.domain.model.cryptocompare.historical.daily.ResponseHistoricalDailyDomain
 import tv.pouyaam.bottrader.domain.usecase.coinbase.price.PriceUseCase
 import tv.pouyaam.bottrader.domain.usecase.cryptocompare.historical.daily.HistoricalDailyUseCase
+import tv.pouyaam.bottrader.navigation.domain.NavResultDomain
+import tv.pouyaam.bottrader.navigation.result.NavResultHandler
 import tv.pouyaam.bottrader.network.model.cryptocompare.historical.RequestHistorical
+import tv.pouyaam.bottrader.ui.base.ViewModelBase
 
 @ExperimentalCoroutinesApi
-class PriceViewModel(
+class ViewModelPrice(
     private val priceUseCase: PriceUseCase,
     private val historicalDailyUseCase: HistoricalDailyUseCase
-): ViewModel() {
+): ViewModelBase() {
     private val _btcPrice: MutableLiveData<ResponsePriceDomain> = MutableLiveData()
     val btcPrice: LiveData<ResponsePriceDomain> = _btcPrice
 
     private val _btcMonthPrice: MutableLiveData<ResponseHistoricalDailyDomain> = MutableLiveData()
     val btcMonthPrice: LiveData<ResponseHistoricalDailyDomain> = _btcMonthPrice
-
 
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     var loading: LiveData<Boolean> = _loading

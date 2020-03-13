@@ -2,8 +2,10 @@ package tv.pouyaam.bottrader.ui.price.view
 
 import android.util.Log
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_price.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.ta4j.core.*
 import org.ta4j.core.analysis.criteria.TotalProfitCriterion
@@ -16,22 +18,28 @@ import org.ta4j.core.trading.rules.UnderIndicatorRule
 import tv.pouyaam.bottrader.R
 import tv.pouyaam.bottrader.databinding.FragmentPriceBinding
 import tv.pouyaam.bottrader.domain.model.cryptocompare.historical.daily.DataItemDomain
+import tv.pouyaam.bottrader.navigation.domain.NavResultDomain
 import tv.pouyaam.bottrader.ui.base.FragmentBase
+import tv.pouyaam.bottrader.ui.base.ViewModelBase
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
+@FlowPreview
 @ExperimentalCoroutinesApi
-class FragmentPrice : FragmentBase<FragmentPriceBinding, PriceViewModel>() {
-    private val viewModel: PriceViewModel by viewModel()
+class FragmentPrice : FragmentBase<FragmentPriceBinding, ViewModelPrice>(), FragmentPriceContract {
+    private val viewModelPrice: ViewModelPrice by viewModel()
     override fun getViewId(): Int = R.layout.fragment_price
 
-    override fun bindViewModel() {
-        binding.viewModel = viewModel
+    override fun onBinding() : ViewModelBase {
+        binding.viewModel = viewModelPrice
+        binding.contract = this
+
+        return viewModelPrice
     }
 
-    override fun viewModelBinded() {
+    override fun onBindingFinished() {
         binding.viewModel?.loading?.observe(this) {
             if (it) btc_price.text = "Loading..."
         }
@@ -43,10 +51,16 @@ class FragmentPrice : FragmentBase<FragmentPriceBinding, PriceViewModel>() {
         binding.viewModel?.btcPrice?.observe(this) {
             btc_price.text = "${it.dataDomain.amount} ${it.dataDomain.currency}"
         }
-//
-//        binding.viewModel?.btcMonthPrice?.observe(this) {
-//            rsiStrats(it.dataDomain.data)
-//        }
+    }
+
+    override fun navigateToResultPage() {
+        navigateToDirection(
+            FragmentPriceDirections.actionFragmentPriceToResultTest()
+        )
+    }
+
+    override fun onResult(navResultDomain: NavResultDomain) {
+        btc_price.text = "$navResultDomain"
     }
 
     private fun rsiStrats(data: List<DataItemDomain>) {

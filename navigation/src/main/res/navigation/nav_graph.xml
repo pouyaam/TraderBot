@@ -7,6 +7,18 @@
     <fragment
         android:id="@+id/fragment_price"
         android:name="tv.pouyaam.bottrader.ui.price.view.FragmentPrice"
+        >
+
+        <action
+            android:id="@+id/action_fragment_price_to_result_test"
+            app:destination="@id/fragment_result_test"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_result_test"
+        android:name="tv.pouyaam.bottrader.ui.test.view.FragmentResultTest"
         />
+
 
 </navigation>
