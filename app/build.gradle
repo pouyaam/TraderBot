@@ -4,6 +4,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -51,6 +52,9 @@ dependencies {
     implementation project(path: Dependencies.Modules.domain)
     implementation project(path: Dependencies.Modules.network)
     implementation project(path: Dependencies.Modules.repository)
+    implementation project(path: Dependencies.Modules.common)
+    implementation project(path: Dependencies.Modules.navigation)
+
     implementation Dependencies.Kotlin.kotlin
 
     implementation Dependencies.Android.appCompat
@@ -69,6 +73,10 @@ dependencies {
     // Coroutines
     implementation Dependencies.Couroutines.coroutinesCore
     implementation Dependencies.Couroutines.coroutinesAndroid
+
+    // Navigation
+    implementation Dependencies.Navigation.navFragmentKtx
+    implementation Dependencies.Navigation.navUiKtx
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

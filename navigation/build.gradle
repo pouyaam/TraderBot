@@ -1,0 +1,14 @@
+import tv.pouyaam.dependencies.Dependencies
+
+apply from: '../modules_common.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+dependencies {
+    implementation project(path: Dependencies.Modules.common)
+    implementation Dependencies.Koin.koinAndroidx
+    // Navigation
+    implementation Dependencies.Navigation.navFragmentKtx
+    implementation Dependencies.Navigation.navUiKtx
+
+
+}

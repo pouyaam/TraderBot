@@ -2,7 +2,23 @@ import tv.pouyaam.dependencies.Dependencies
 
 apply from: '../modules_common.gradle'
 
+loadConfig()
+
+android {
+    defaultConfig {
+        buildConfigField("String", "COINBASE_URL", "\"$config.url.coinBase\"")
+        buildConfigField("String", "CRYPTOCOMPARE_URL", "\"$config.url.cryptoCompare\"")
+    }
+}
+
+def loadConfig() {
+    def configFile = file('config.groovy')
+    def config = new ConfigSlurper().parse(configFile.toURI().toURL())
+    project.ext.config = config
+}
+
 dependencies {
+
     implementation Dependencies.Retrofit.retrofit
     implementation Dependencies.Retrofit.retrofitGsonConverter
     implementation Dependencies.OkHttp.okHttp
