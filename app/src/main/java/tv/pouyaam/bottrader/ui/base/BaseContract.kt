@@ -5,5 +5,5 @@ import tv.pouyaam.bottrader.navigation.domain.NavResultDomain
 
 interface BaseContract {
     fun navigateToDirection(direction: NavDirections)
-    fun popWithResult(channelName: String, payload: Any)
+    fun popWithResult(resultOwner: String, channelName: String, payload: Any)
 }

@@ -1,6 +1,7 @@
 package tv.pouyaam.bottrader.ui.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,7 @@ import tv.pouyaam.bottrader.navigation.result.NavResultHandler
 
 @FlowPreview
 abstract class FragmentBase<BINDING : ViewDataBinding, VIEWMODEL: ViewModelBase> : Fragment(), BaseContract {
-    private val navResultHandler: NavResultHandler by inject()
+    protected val navResultHandler: NavResultHandler by inject()
     private lateinit var viewModelBase: ViewModelBase
     protected lateinit var binding: BINDING
 
@@ -36,7 +37,9 @@ abstract class FragmentBase<BINDING : ViewDataBinding, VIEWMODEL: ViewModelBase>
 
         onBindingFinished()
 
-        viewModelBase.result.observe(this) { onResult(it) }
+        viewModelBase.result.observe(this) {
+            onResult(it)
+        }
 
         return binding.root
     }
@@ -45,14 +48,11 @@ abstract class FragmentBase<BINDING : ViewDataBinding, VIEWMODEL: ViewModelBase>
     override fun navigateToDirection(
         direction: NavDirections
     ) {
-
-        navResultHandler.newChannel().resultChannel.onResult { viewModelBase.result(it) }
-
         findNavController().navigate(direction)
     }
 
-    override fun popWithResult(channelName: String, payload: Any) {
-        navResultHandler.send(channelName, payload)
+    override fun popWithResult(resultOwner: String, channelName: String, payload: Any) {
+        navResultHandler.sendWithMap(resultOwner, channelName, payload)
         findNavController().popBackStack()
     }
 

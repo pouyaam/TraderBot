@@ -19,6 +19,7 @@ import tv.pouyaam.bottrader.R
 import tv.pouyaam.bottrader.databinding.FragmentPriceBinding
 import tv.pouyaam.bottrader.domain.model.cryptocompare.historical.daily.DataItemDomain
 import tv.pouyaam.bottrader.navigation.domain.NavResultDomain
+import tv.pouyaam.bottrader.navigation.ktx.onResult
 import tv.pouyaam.bottrader.ui.base.FragmentBase
 import tv.pouyaam.bottrader.ui.base.ViewModelBase
 import java.time.Duration
@@ -51,6 +52,10 @@ class FragmentPrice : FragmentBase<FragmentPriceBinding, ViewModelPrice>(), Frag
         binding.viewModel?.btcPrice?.observe(this) {
             btc_price.text = "${it.dataDomain.amount} ${it.dataDomain.currency}"
         }
+
+        navResultHandler
+            .receiveWithFlow("TEST")
+            .onResult { viewModelPrice.result(it) }
     }
 
     override fun navigateToResultPage() {
@@ -60,6 +65,7 @@ class FragmentPrice : FragmentBase<FragmentPriceBinding, ViewModelPrice>(), Frag
     }
 
     override fun onResult(navResultDomain: NavResultDomain) {
+        Log.d("ON_RESULT_PRICE", "fragment= $this navResultDomain= $navResultDomain")
         btc_price.text = "$navResultDomain"
     }
 
