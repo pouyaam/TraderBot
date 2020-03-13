@@ -55,7 +55,7 @@ class FragmentPrice : FragmentBase<FragmentPriceBinding, ViewModelPrice>(), Frag
 
         navResultHandler
             .receiveWithFlow("TEST")
-            .onResult { viewModelPrice.result(it) }
+            .onResult { onResult(it) }
     }
 
     override fun navigateToResultPage() {
@@ -65,7 +65,6 @@ class FragmentPrice : FragmentBase<FragmentPriceBinding, ViewModelPrice>(), Frag
     }
 
     override fun onResult(navResultDomain: NavResultDomain) {
-        Log.d("ON_RESULT_PRICE", "fragment= $this navResultDomain= $navResultDomain")
         btc_price.text = "$navResultDomain"
     }
 
