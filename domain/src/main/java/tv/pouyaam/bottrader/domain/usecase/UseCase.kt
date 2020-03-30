@@ -3,7 +3,7 @@ package tv.pouyaam.bottrader.domain.usecase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import tv.pouyaam.bottrader.repository.Repository
-import tv.pouyaam.transformation.Transformation
+import tv.pouyaam.bottrader.domain.transformation.Transformation
 
 abstract class UseCase<REQUEST, RESPONSE, DOMAIN>(
     private val repository: Repository<REQUEST, RESPONSE>,
